@@ -18,16 +18,51 @@
   <div class="writeCommentary">
     
       <h2>Vous avez un avis ?</h2>
-      <form action="/anime/{id}/new_review" method="POST">
+      <form action="/confirmationpost" method="POST">
         @csrf
-        <div class="input-group">
+
+     <div class=rating-group >
+
+     <!-- <ul><li class="rating"><a href="#">Note</a>
+       <ul>
+          <li><a href="#">0</a></li>
+          <li><a href="#">1</a></li>
+          <li><a href="#">2</a></li>
+          <li><a href="#">3</a></li>
+          <li><a href="#">4</a></li>
+          <li><a href="#">5</a></li>
+          <li><a href="#">6</a></li>
+          <li><a href="#">7</a></li>
+          <li><a href="#">8</a></li>
+          <li><a href="#">9</a></li>
+          <li><a href="#">10</a></li>
+       </ul>
+       </li></ul> -->
+
+        <SELECT class='note' name="rating">
+              <OPTION name="rating" >0
+              <OPTION name="rating" >1
+              <OPTION name="rating" >2
+              <OPTION name="rating" >3
+              <OPTION name="rating" >4
+              <OPTION name="rating" >5
+              <OPTION name="rating" >6
+              <OPTION name="rating" >7
+              <OPTION name="rating" >8
+              <OPTION name="rating" >9
+              <OPTION name="rating" >10
+        </SELECT>
+
+     </div>
+
+      <div class="input-group">
           <label for="commentary"> Écrivez votre critique :</label>
-          <input id="commentary" name="commentary" type="text" required />
-          
+          <textarea id="commentary" name="commentary" type="text" required></textarea>
+
           @error('commentary')
             <p class="error">{{ $message }}</p>
           @enderror
-        </div>
+      </div>
 
         <button class="cta">Envoyer</button>
 

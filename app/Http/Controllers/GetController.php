@@ -59,7 +59,7 @@ class GetController extends Controller {
             if (Auth::user()) {
               $anime = DB::select("SELECT * FROM animes WHERE id = ?", [$id])[0]; 
                // J'y ai ajouté la variable anime pour chopper le nom de l'anime sur lequel une critique sera déposé
-             // on maintiens la syntaxe avec ? (pour + de sécurité)
+             // on maintiens la syntaxe avec ? (+ sécurisé)
                return view('new_review', compact('anime', ["anime" => $anime])); 
             } else {
               return view('login');
@@ -71,9 +71,11 @@ class GetController extends Controller {
     public function addComment(){
 
       $commentary = request('commentary');
+      $rating = request('rating');
 
       $leCommentaire = new Review();
       $leCommentaire->comment = $commentary;
+      $leCommentaire->rating = $rating;
       $leCommentaire->save();
 
       return back();
@@ -87,6 +89,19 @@ class GetController extends Controller {
         // // ~ vue
         // return redirect('/anime/{id}/new_review');
     }
+
+
+    // Controller pour insertion des commentaires si jamais je trouve une soluce
+    //*************************************************************** */
+    // public function newComment($id){
+    //     $commentaire = new Review;
+    //     $commentaire->rating = request('rating');
+    //     $commentaire->comment = request('commentary');
+    //     $commentaire->user_id = request($id);
+    //     $commentaire->anime_id = request('anime_id');
+    //     $commentaire->save();
+    //     return redirect('/anime/{id}/new_review');
+    //   }
 
 
 
