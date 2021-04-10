@@ -1,21 +1,20 @@
+
+
+
+
 <x-layout>
   <x-slot name="title">
-  {{ $anime->title }}
-  </x-slot>
-
-  <h1>Critiques sur {{ $anime->title }}</h1>
-
   
-
+<h1>Les commentaires (reviews)</h1>
 
 
 
   <ul>
-     @foreach($reviews as $review)
-        <li>Note: {{$review->rating}}/10 </br> {{ $review->comment }} </li>
-        </br>
-     @endforeach
-  </ul>
+@foreach($reviews as $review)
+<li>Note: {{$review->rating}} </br> {{ $review->comment }} </li>
+</br>
+@endforeach
+</ul>
 
 
 

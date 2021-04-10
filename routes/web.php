@@ -6,6 +6,9 @@ use Illuminate\Support\Facades\Hash;
 use App\Http\Controllers\GetController;
 use App\Models\Review;
 use App\Models\User;
+use App\Models\Users;
+
+use App\Models\Animes;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Support\Facades\Schema;
@@ -25,27 +28,40 @@ use Illuminate\Support\Facades\Schema;
 |
 */
 
+//#1 page d'accueil (view)
 Route::get('/',[GetController::class,'home']);
 
-// Route::get('/', function () {
-//   $animes = DB::select("SELECT * FROM animes");
-//   return view('welcome', ["animes" => $animes]);
-// });
-
-//page d'un seul animé sélectionné
+//#2 page d'un seul animé sélectionné (view)
 Route::get('/anime/{id}',[GetController::class,'idAnime']);
 
-
-
-//page critique/reviews
-Route::get('/anime/{id}/new_review',[GetController::class,'reviews']);
-
-
-//page de connexion (log in)
+//#3 page de connexion (log in) (view)
 Route::get('/login',[GetController::class,'login']);
 
+//#4 page d'inscription (sign up) (view)
+Route::get('/signup',[GetController::class,'signup']);
 
-//pour se connecter avec ses identifiants
+//#5a page critique/reviews
+Route::get('/anime/{id}/new_review',[GetController::class,'reviews']);
+
+//#5b - afficher une page de confirmation lorsque j ai bien déposé une critique (view)
+Route::get('/confirmationpost',[GetController::class, 'confirmed']);
+
+//#5c - ajouter dans la bdd une note & un commentaire 
+Route::post('/anime/{id}/new_review',function($id){
+
+  $anime = DB::select("SELECT * FROM animes WHERE id = ?", [$id])[0];
+  $commentaire = new App\Models\Review;
+  $commentaire->rating = request('rating');
+  $commentaire->comment = request('commentary');
+  $commentaire->user_id = Auth::user()->id;
+  $commentaire->anime_id = $anime->id;
+  $commentaire->save();
+    
+ return redirect('confirmationpost');
+
+});
+
+//#6 pour se connecter avec ses identifiants
 Route::post('/login', function (Request $request) {
   $validated = $request->validate([
     "username" => "required",
@@ -59,17 +75,7 @@ Route::post('/login', function (Request $request) {
   ]);
 });
 
-
-//page d'inscription (sign up)
-Route::get('/signup',[GetController::class,'signup']);
-
-//*************************************************** */
-// La Route juste au dessus et celle en bas , je suis pas sur mais je pense que
-// c est les memes mais t avais tenté des trucs   avec les controllers donc verifies ca apres psk t'es plus sur
-//*************************************************** */
-
-// Route::post('signup',[PostController::class,'loginn']);
-
+//#7 pour se créer un nouveau compte
 Route::post('signup', function (Request $request) {
   $validated = $request->validate([
     "username" => "required",
@@ -85,8 +91,7 @@ Route::post('signup', function (Request $request) {
   return redirect('/');
 });
 
-
-// Route::post('signout',[PostController::class,'signout']);
+//#8 pour se déconnecter
 Route::post('signout', function (Request $request) {
   Auth::logout();
   $request->session()->invalidate();
@@ -94,37 +99,46 @@ Route::post('signout', function (Request $request) {
   return redirect('/');
 });
 
-//xxXXxxXXxxXXxxXXxxXXXxxXXxxxXXxxXXxxXXxxXXxxXXxxXXxxXXxxXXxxxxxxxxxxxxxxxx
-
-// Route::post('/anime/{id}/new_review', function ($request){
-//   $anime = DB::select("SELECT * FROM animes WHERE id = ?", [$id])[0];
-
-// });
-//xxXXxxXXxxXXxxXXxxXXXxxXXxxxXXxxXXxxXXxxXXxxXXxxXXxxXXxxXXxxxxxxxxxxxxxxxx
-
-// Route::post('/anime/{id}/new_review',[GetController::class,'addComment']);
+Route::get('top',[GetController::class,'topView']);
 
 
- Route::post('/anime/{id}/new_review',function($id){
-            
-    $anime = DB::select("SELECT * FROM animes WHERE id = ?", [$id])[0]; 
-
-    $commentaire = new App\Models\Review;
-    $commentaire->rating = request('rating');
-    $commentaire->comment = request('commentary');
-    $commentaire->user_id = Auth::user()->id;
-    $commentaire->anime_id = $anime->id;
-    $commentaire->save();
-    return redirect('/confirmationpost');
-    
-
-    // $commentaire->foreign('user_id')->references('id')->on('users');
-    // $commentaire->foreign('anime_id')->references('id')->on('animes');
-   
-    // return redirect('/anime/{id}/new_review');
-
-  });
-
- 
-
+// Route::get('/anime/{id}/new_review',function(){
+//    $reviews = App\Models\Review::all();
+//    return view('/anime/{id}/new_review', ['reviews' => $reviews]);
   
+// });
+
+
+  // function(){
+  //   $reviews =  App\Models\Review::all();
+  //   return view('/utilisateurs', ['reviews' => $reviews],);
+   
+  //  });
+
+
+// Route::get('/anime/{id}/new_review', function(){
+//   $review = DB::select("SELECT * FROM review");
+// // $commentaire->rating = request('rating');
+// // $commentaire->comment = request('commentary');
+// // $commentaire->user_id = request('user_id')
+// });
+  
+
+
+
+//XXxxXXxxXXxx__--__--__--__--__--__--xxXXxxXXxxXXxxXXxxXX
+//GET pour afficher les commentaires !!!!!!!!!
+// Route::get('/anime/{id}/new_review',function($id){
+            
+//   $review = DB::select("SELECT * FROM review WHERE anime_id = ?", [$id])[0];
+
+//   $commentaire = new App\Models\Review;
+//   // $commentaire->user_id = Auth::user()->id;
+//   $commentaire->rating = $review->rating;
+//   $commentaire->comment = $review->comment;
+//   $commentaire->anime_id = $review->id;
+// return ('/');
+   
+  // });
+//XXxxXXxxXXxx__--__--__--__--__--__--xxXXxxXXxxXXxxXXxxXX
+
