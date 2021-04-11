@@ -5,19 +5,12 @@
 
   <h1>Critiques sur {{ $anime->title }}</h1>
 
-  
-
-
-
-
   <ul>
      @foreach($reviews as $review)
-        <li>Note: {{$review->rating}}/10 </br> {{ $review->comment }} </li>
+        <li class="ctaReviews">Note: <b>{{$review->rating}}/10</b> </br> {{ $review->comment }} </li>
         </br>
      @endforeach
   </ul>
-
-
 
   <div class="writeCommentary">
       <h2>Vous avez un avis ?</h2>

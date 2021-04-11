@@ -20,6 +20,16 @@
           <button class="cta">Ajouter à ma watchlist</button>
         </form>
       </div>
+     
+
+      <ul>
+          @foreach($reviews as $review)
+           <li class="ctaReviews">Note: <b>{{$review->rating}}/10</b> </br> {{ $review->comment }} </li>
+           </br>
+         
+          @endforeach
+     </ul>
+
     </div>
   </article>
 </x-layout>

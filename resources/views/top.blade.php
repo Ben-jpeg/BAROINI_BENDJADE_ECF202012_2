@@ -8,8 +8,14 @@
     <h3>Voici le classement des animés préférés de la communauté</h3>
     
       <div class="actions"> 
-        <p>[Nom de l'anime + note moyenne]</p>
-        <p>Image</p>
+
+       
+           <ul>
+
+             <li>[Nom de l'anime + note moyenne]</li>
+
+           </ul>
+       
       </div>
    
   

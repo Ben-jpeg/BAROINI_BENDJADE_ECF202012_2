@@ -241,10 +241,29 @@ input {
 }
 
 
-/* Ajouts personnels - BEN -  */
+/* Ajouts personnels ----> */
 
 
-/*  :                          */
+/*:                          */
+
+
+/*page Anime */
+
+.ctaReviews {
+    cursor: pointer;
+    border: 2px solid;
+    text-align: center;
+    padding: 0.25rem;
+    text-decoration: none;
+    display: inline-block;
+    padding: 0.5rem 1rem;
+    color: inherit;
+    box-shadow: 0.25rem 0.25rem 0 #f8fc0c;
+    background: white;
+    width: 85%;
+    height: auto;
+    margin: 10px;
+}
 
 .writeCommentary {
     color: blue;
