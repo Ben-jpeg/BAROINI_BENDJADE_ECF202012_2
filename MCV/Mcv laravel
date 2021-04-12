@@ -1,0 +1,9 @@
+MVC = Model Vue Controller
+
+Ces éléments sont interdépendants. Quand le Model permet la conservation des données (présentes en bdd) il peux aussi servi à protéger l'accès des tables avec de certaines conditions par exemple, Vue constitue l'affichage du contenu que l'on souhaite présenter comme visible sur le navigateur (html/php). Le Controller lui est en relation avec les deux concept (Modele et Vue). C'est lui qui contient et applique les fonctions codés destiné à faire fonctionner correctement les fonctionnalités présentes dans Vue, à l'aide de sa lisaison avec la base de données grace au Model, mais aussi permets de modifier le contenu du model ou de la vue.
+
+Laravel possede aussi plusieurs autres fonctionnalité qui permettent une meilleur sécurité comme le CSRF qui sont des tokens générés automatiquement par le framework, à placer apres l'ouverture d'un form. 
+le @csrf sont des tokens(jetons) qui sont générés par laravel pour chaque sessions active, il compare le token avec celui requis pour la page en question et le valide. Si le token n est pas généré ou pas le meme, laravel affiche une page d'erreur (419) pour éviter des attaques csrf (qui eux sont des requettes http envoyé a un utilisateur à son insu, lui faisant faire activer des choses malgré lui) .
+
+
+
