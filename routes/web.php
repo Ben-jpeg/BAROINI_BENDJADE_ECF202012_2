@@ -8,31 +8,15 @@ use App\Http\Controllers\ReviewController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LogsController;
 use App\Http\Controllers\TopController;
-use App\Models\Review;
 use App\Models\User;
-use App\Models\Users;
-use App\Models\Animes;
-use Illuminate\Database\Schema\Blueprint;
-use Illuminate\Database\Migrations\Migration;
-use Illuminate\Support\Facades\Schema;
-
-
-
-
 
 /*
 |--------------------------------------------------------------------------
 | Web Routes
 |--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-
 //Model      =   M
 //Vue        =   V
 //Controller =   C
-|
 */
 
 //#1 page d'accueil (view)
@@ -121,31 +105,6 @@ Route::get('top',[TopController::class,'topView']);  #C
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
   // function(){
   //   $reviews =  App\Models\Review::all();
   //   return view('/utilisateurs', ['reviews' => $reviews],);
@@ -153,10 +112,7 @@ Route::get('top',[TopController::class,'topView']);  #C
   //  });
 
 
-
-
-
-//GET pour afficher les commentaires !!!!!!!!!
+//GEt qui fonctionne pour afficher les coms si jamais le test que tu fais marche pas
 // Route::get('/anime/{id}/new_review',function($id){
             
 //   $review = DB::select("SELECT * FROM review WHERE anime_id = ?", [$id])[0];
