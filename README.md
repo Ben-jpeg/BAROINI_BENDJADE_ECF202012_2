@@ -1,68 +1,35 @@
-# Pré-requis
+# MVC = Model Vue Controller;
 
-Pour pouvoir lancer le site, vous aurez besoin de:
 
--   PHP cli >= 7.3
--   un serveur MySQL
--   [composer](https://getcomposer.org/download/)
--   toutes les [extensions PHP](https://laravel.com/docs/8.x/deployment#server-requirements) nécessaires au bon fonctionnement de Laravel
+Ces éléments sont interdépendants. Quand le Model permet la conservation des données (présentes en bdd) 
+il permet aussi de protéger l'accès des tables avec de certaines conditions par exemple.
+Vue constitue l'affichage du contenu que l'on souhaite présenter comme visible sur le navigateur (html/php). 
+Le Controller quant à lui est en relation avec les deux cocnept (Modele et Vue). C'est lui qui contient et 
+applique les fonctions codés, destiné à faire fonctionner correctement les fonctionnalités présentes dans Vue,
+à l'aide de sa lisaison avec la base de données grace au Model, mais aussi permets de modifier le contenu du Model ou de la Vue.
 
-# Installation
 
-## Installation des dépendances
+Laravel possede aussi plusieurs autres fonctionnalité qui permettent une meilleur sécurité comme le CSRF qui sont 
+générés automatiquement par le framework, à placer apres l'ouvreture d'un form. 
+________________________________________________________________________________________
+#CSRF
 
-Pour installer les dépendances du projet, vous devrez utiliser composer :
 
-```
-composer install
-```
+le @csrf représente des tokens(jetons) qui sont générés par laravel pour chaque sessions active. Il compare le token avec celui 
+requis pour la page en question et le valide. Si le token n est pas généré ou pas le meme, laravel affiche une page 
+d'erreur (419) pour éviter des attaques csrf (qui eux sont des requettes http envoyé a un utilisateur à 
+son insu, lui faisant faire activer des choses malgré lui par ex) .
 
-## Création de la base de données
+________________________________________________________________________________________
+#Laravel - avis
 
-Pour faire tourner le projet, vous devrez créer une nouvelle base de données sur
-votre serveur MySQL (avec PhpMyAdmin ou bien en ligne de commande).
-
-## Configuration de la base de données
-
-Une fois les dépendances installées, vous devrez copier le fichier
-`.env.example` en `/env`
-
-```
-cp .env.example .env
-```
-
-Vous devrez ensuite modifier les informations de connexion à la base de données
-contenues dans ce fichier, en fonction du nom que vous aurez donné à votre base
-de donnée, et de votre environnement (port, username, mot de passe)
-
-```
-DB_PORT=???
-DB_DATABASE=???
-DB_USERNAME=???
-DB_PASSWORD=???
-```
-
-### Migrations
-
-Une fois vos informations de connexion renseignées, vous devrez créer toutes les
-tables du projet. Pour faciliter cette tâche, Laravel utilise un système de
-[migrations](https://laravel.com/docs/8.x/migrations) qui automatisent ce
-processus.
-
-Pour lancer les migration, exécutez la commande suivante :
-
-```
-php artisan migrate
-```
-
-## Génération de la clé de chiffrement
-
-Vous pouvez maintenant lancer le serveur de développement en ligne de commande
-
-```
-php artisan serve
-```
-
-Lorsque vos accéderez au site, Vous verrez une erreur Laravel, avec un bouton
-qui vous suggère de créer une clé. Appuyez sur ce bouton, puis relancer votre
-serveur de développement.
+La documentation laravel est très fourni et très riche, mais semble être aussi très complète et explicative, avec 
+beaucoup d'exemple pour chaque concept. La documentation etant complètement en anglais, ca peux devenir difficile
+de passer beaucoup de temps dessus, mais est nécéssaire pour bien voir les différents aspect du fonctionnement du
+framewokr et son écriture spécifique (genre ex: Auth::table(user)
+                                                ->join(id, user_id)  )
+                                                
+ Il est plus facile aussi d'utiliser laravel lorsque l'on comprend au fur et a mesure les concept de 
+ model conceptuel de données ou modele logique de donnees, ca permet une vue général du système et personnellement
+ de pouvoir vérifier mon code en cas d'erreur et y remédier plus rapidement et facilement.
+                                                
